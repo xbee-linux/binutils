@@ -81,10 +81,10 @@ build:
       directory: "{% xbeeSrc %}/binutils-{% version %}"
   - shell:
       cmds:
-        - ../configure --prefix={% xbeeOut %} --enable-gold --enable-ld=default --enable-plugins --disable-werror --enable-64-bit-bfd --with-system-zlib
+        - ../configure --prefix=/usr --enable-gold --enable-ld=default --enable-plugins --disable-werror --enable-64-bit-bfd --with-system-zlib
         - make tooldir=/usr
 #        - make -k check (currently failing)
-        - make tooldir=/usr install -j1 DESTDIR={% xbeeOut %}
+        - make tooldir=/usr install DESTDIR={% xbeeOut %}
         - rm -fv {% xbeeOut %}/lib/lib{bfd,ctf,ctf-nobfd,opcodes}.a
       directory: "{% xbeeSrc %}/binutils-{% version %}/build"
 
