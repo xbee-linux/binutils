@@ -59,7 +59,7 @@ in:
 dependencies:
   - expect
   - zlib
-  - tcl
+
 
 provision:
   - url:
