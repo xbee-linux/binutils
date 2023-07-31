@@ -53,7 +53,7 @@ description: |
 
   libopcodes: A library for dealing with opcodes—the “readable text” versions of instructions for the processor; it is used for building utilities like objdump
 
-in:
+var:
   version: 2.37
 
 dependencies:
@@ -63,29 +63,29 @@ dependencies:
 
 provision:
   - url:
-      from: https://ftp.gnu.org/gnu/binutils/binutils-{% version %}.tar.xz
-      todir: "{% xbeeSrc %}"
+      from: https://ftp.gnu.org/gnu/binutils/binutils-{{ .version }}.tar.xz
+      todir: "{{ .xbee.src }}"
   - url:
-      from: https://www.linuxfromscratch.org/patches/lfs/11.0/binutils-{% version %}-upstream_fix-1.patch
-      todir: "{% xbeeSrc %}"
+      from: https://www.linuxfromscratch.org/patches/lfs/11.0/binutils-{{ .version }}-upstream_fix-1.patch
+      todir: "{{ .xbee.src }}"
       unpack: false
-  - folder: "{% xbeeSrc %}/binutils-{% version %}/build"
+  - folder: "{{ .xbee.src }}/binutils-{{ .version }}/build"
 
 
 build:
   - shell:
       cmds:
-        - patch -Np1 -i ../binutils-{% version %}-upstream_fix-1.patch
+        - patch -Np1 -i ../binutils-{{ .version }}-upstream_fix-1.patch
         - sed -i '63d' etc/texi2pod.pl
         - find -name \*.1 -delete
-      directory: "{% xbeeSrc %}/binutils-{% version %}"
+      directory: "{{ .xbee.src }}/binutils-{{ .version }}"
   - shell:
       cmds:
         - ../configure --prefix=/usr --enable-gold --enable-ld=default --enable-plugins --disable-werror --enable-64-bit-bfd --with-system-zlib
         - make tooldir=/usr
 #        - make -k check (currently failing)
-        - make tooldir=/usr install DESTDIR={% xbeeOut %}
-        - rm -fv {% xbeeOut %}/lib/lib{bfd,ctf,ctf-nobfd,opcodes}.a
-      directory: "{% xbeeSrc %}/binutils-{% version %}/build"
+        - make tooldir=/usr install DESTDIR={{ .xbee.out }}
+        - rm -fv {{ .xbee.out }}/lib/lib{bfd,ctf,ctf-nobfd,opcodes}.a
+      directory: "{{ .xbee.src }}/binutils-{{ .version }}/build"
 
 
