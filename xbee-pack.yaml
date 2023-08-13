@@ -56,7 +56,7 @@ description: |
 var:
   version: 2.37
 
-dependencies:
+builders:
   - expect
   - zlib
 
