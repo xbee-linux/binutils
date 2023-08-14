@@ -62,12 +62,9 @@ builders:
 
 
 provision:
-  - url:
-      from: https://ftp.gnu.org/gnu/binutils/binutils-{{ .version }}.tar.xz
-      todir: "{{ .xbee.src }}"
+  - url: https://ftp.gnu.org/gnu/binutils/binutils-{{ .version }}.tar.xz
   - url:
       from: https://www.linuxfromscratch.org/patches/lfs/11.0/binutils-{{ .version }}-upstream_fix-1.patch
-      todir: "{{ .xbee.src }}"
       unpack: false
   - folder: "{{ .xbee.src }}/binutils-{{ .version }}/build"
 
