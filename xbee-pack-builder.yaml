@@ -1,7 +1,5 @@
 schema-version: 1.0
 
-type: builder
-
 description: |
   The Binutils package contains a linker, an assembler, and other tools for handling object files.
 
@@ -59,8 +57,7 @@ var:
 
 dependency: expect
 
-builders:
-  - zlib
+builder: zlib
 
 
 provision:
